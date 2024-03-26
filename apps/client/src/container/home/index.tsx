@@ -9,7 +9,7 @@ const manager = new Manager("http://localhost:3001/socket.io/socket.io.js");
 const socket = manager.socket("/queue");
 
 export const HomeContainer = () => {
-  const { state, handleChangeState, getQueue, queue } = useQueueStore();
+  const { state, handleChangeState, getQueue, queue, resetState } = useQueueStore();
 
 
   const handleChange = (e: ChangeEvent) => {
@@ -18,6 +18,7 @@ export const HomeContainer = () => {
   };
   const handleSubmit = () => {
     socket.emit("add-to-queue", state);
+    resetState();
   };
 
   useEffect(() => {
@@ -27,11 +28,11 @@ export const HomeContainer = () => {
     socket.on("queue", (data) => {
       getQueue(data);
     });
-  }, []);
+  }, [getQueue]);
 
   return (
-    <div className="bg-slate-200 w-screen h-screen flex justify-center items-center">
-      <div className="w-1/2">
+    <div className="bg-slate-200 w-screen h-screen flex justify-center">
+      <div className="w-1/2 mt-3">
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
           <div className="p-4">
             <h2 className="text-xl font-bold text-gray-800">Agregar a cola</h2>
@@ -43,6 +44,7 @@ export const HomeContainer = () => {
                 name="name"
                 placeholder="Escriba su nombre aquí"
                 onChange={handleChange}
+                value={state.name || ''}
               />
               <button
                 type="button"

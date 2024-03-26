@@ -5,6 +5,7 @@ interface QueueState {
   queue: { name: string; state: number }[]; // Assuming queue holds strings, adjust if needed
   handleChangeState: (data: { name: string }) => void;
   getQueue: (data: { name: string; state: number }[]) => void;
+  resetState: () => void;
 }
 
 export const useQueueStore = create<QueueState>()((set) => ({
@@ -14,4 +15,5 @@ export const useQueueStore = create<QueueState>()((set) => ({
   queue: [],
   getQueue: (data: { name: string; state: number }[]) =>
     set((state: QueueState) => ({ ...state, queue: data })),
+  resetState: () => set((state: QueueState) => ({ ...state, state: {} })),
 }));

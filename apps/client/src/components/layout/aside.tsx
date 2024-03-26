@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
@@ -47,7 +47,9 @@ export function Aside({
         {/* Menu */}
         <div className="flex-1 overflow-y-auto">
           <div className="p-2">
-            <h2 className="cursor-default text-sm font-normal text-gray-500">Menu</h2>
+            <h2 className="cursor-default text-sm font-normal text-gray-500">
+              Menu
+            </h2>
           </div>
           <ul>
             {MainMenu.map((MenuItem) => (
@@ -58,7 +60,7 @@ export function Aside({
                     "flex w-full cursor-pointer items-center justify-between space-x-2 px-4 py-2 text-gray-300 transition-colors duration-200 hover:text-white",
                     {
                       "text-white": pathname === MenuItem.path,
-                    },
+                    }
                   )}
                   role="button"
                   tabIndex={0}
@@ -86,14 +88,17 @@ export function Aside({
                 {MenuItem.children && openMenu === MenuItem.title ? (
                   <ul className="pl-4">
                     {MenuItem.children.map((child) => (
-                      <li key={`${child.path}_${child.title}`} className="w-full">
+                      <li
+                        key={`${child.path}_${child.title}`}
+                        className="w-full"
+                      >
                         <Link
                           aria-label={child.title}
                           className={clsx(
                             "flex w-full items-center space-x-2 px-4 py-2 text-gray-400 transition-colors duration-200 hover:text-white", // Cambiamos el color del texto de los submenús a gris
                             {
                               "text-white": pathname === child.path,
-                            },
+                            }
                           )}
                           to={child.path}
                         >
@@ -110,8 +115,12 @@ export function Aside({
 
         {/* Footer */}
         <div className="flex h-14 flex-col items-center justify-center">
-          <span className="text-sm font-extralight text-gray-500">© 2023 All Rights Reserved</span>
-          <span className="text-sm font-extralight text-gray-500">Created by LuedanDev</span>
+          <span className="text-sm font-extralight text-gray-500">
+            © 2023 All Rights Reserved
+          </span>
+          <span className="text-sm font-extralight text-gray-500">
+            Created by LuedanDev
+          </span>
         </div>
       </aside>
     </>
